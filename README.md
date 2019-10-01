@@ -2,9 +2,9 @@
 
 1. Git Commands
 + git add <filename>
-+ git commit -m "<commitmessage>
++ git commit -m ""
 + git diff
-+ echo "<text>" << <filename>
++ echo "text" << file
 + git log --oneline --decorate
 + git commit --amend
 
