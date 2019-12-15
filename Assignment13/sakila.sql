@@ -1,0 +1,75 @@
+Assignment13HW: Sakila
+
+# Q1: 
+    SELECT * FROM language ORDER BY name;
+    Answer: English, French, German, Italian, Japanese, Mandarin
+
+#Q2: 
+    SELECT CONCAT (first_name,  " ", last_name, " ") AS full_name FROM actor
+        WHERE last_name LIKE '%BER%'
+        ORDER BY first_name;
+    # Answer: 8   (Christopher Berry, Daryl Wahlberg, Henry Berry, Karl Berry, 
+                Liza Bergman, Nick Wahlberg, Parker Goldberg, Vivien Bergen)
+
+#Q3:
+    SELECT DISTINCT last_name FROM actor;
+    # Answer: 121
+
+#Q4:
+    SELECT title FROM film
+        WHERE description LIKE '%Crocodile%'
+        AND description LIKE '%Shark%';
+    # Answer: 10
+
+#Q5:
+    SELECT CONCAT(first_name, ' ', last_name) AS name, release_year
+        FROM film a JOIN actor b JOIN film_actor c
+        ON a.film_id = c.film_id AND b.actor_id = c.actor_id
+        WHERE description LIKE '%Crocodile%' AND description LIKE '%Shark%'
+        ORDER BY last_name ASC;
+    # Answer: 58 rows
+
+#Q6:
+    SELECT count(*), name
+        FROM film_category a JOIN category b
+        ON a.category_id = b.category_id
+        GROUP BY b.category_id
+        HAVING 40<=count(*)<=60
+        ORDER BY count(*) ASC;
+    # Answer: 16 rows, count from 51 to 74 (Music, Horror, ...)
+
+#Q7:
+    SELECT first_name, last_name FROM actor
+        WHERE first_name = (SELECT first_name FROM actor WHERE actor_id = '24'):
+    # Answer: 3   CAMERON STREEP, CAMERON WRAY, CAMERON ZELLWEGER.
+    
+#Q8:
+    SELECT CONCAT(first_name, ' ', last_name) AS full_name,
+        COUNT(a.actor_id)
+        FROM film_actor a JOIN actor b
+        ON a.actor_id = b.actor_id
+        GROUP BY a.actor_id
+        ORDER BY count(a.actor_id) DESC LIMIT 1;
+    # Answer: Gina Degeneres, 42
+
+#Q9:
+    SELECT name, AVG(length)
+    FROM film a JOIN category b JOIN film_category c
+    ON a.film_id = c.film_id AND b.category_id = c.category_id
+    GROUP BY name HAVING AVG(length)>(SELECT AVG(length)
+    FROM film);
+
+#Q10:
+     SELECT total_sales FROM sales_by_store;
+
+
+
+
+
+
+
+
+
+
+
+
